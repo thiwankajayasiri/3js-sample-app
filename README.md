@@ -41,7 +41,7 @@ Add unit testing. 
 Avoid CDN and use static loading (and get rid of the URL lines) or use the JSDELIVR, fast and reliable service to host the javascript files on CDN. 
 Package and host it as an application, preferably Azure, or AWS. 
 
-Tech-stack : HTML, JavaScript, Node, npm. 
+Tech-stack : HTML, JavaScript, Three.Js. 
 
 Enjoy exploring more and, please feel free to leave a comment on the improvement areas and use this repo as a boilerplate to develop your threejs application. Happy coding!
 
