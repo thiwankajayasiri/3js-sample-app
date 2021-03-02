@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Sample 3JS Application</title>
+        <style>
+            body{
+                margin:0;
+            }
+            canvas{
+                display:block;
+            }
+        </style>
+    </head>
+    <body>
+        <script src="three.js"> </script>
+        <script type="module" src="GLTFLoader.js"> </script>
+        <script type="module" src="OrbitControls.js"></script>
+        <script type="module">
+            import { OrbitControls } from "https://threejs.org/examples/jsm/controls/OrbitControls.js";
+            import {GLTFLoader} from "./GLTFLoader.js";
+            var scene = new THREE.Scene();
+            var camera = new THREE.PerspectiveCamera(
+                75,
+                window.innerWidth / window.innerHeight,
+                0.1,
+                1000
+            );
+            var renderer = new THREE.WebGLRenderer({antialias: true});
+            renderer.setClearColor("#e5e5e5");
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            var loader = new GLTFLoader();
+
+            var obj;
+            loader.load("scene.gltf", function(gltf){
+                obj = gltf.scene;
+                scene.add(gltf.scene);
+
+            });
+            scene.background = new THREE.Color(0xffffff);
+
+            var light = new THREE.HemisphereLight(0xffffff,0x000000,2);
+            scene.add(light);
+            
+            camera.position.set( 0, 0, 10 );
+
+            var controls = new OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.campingFactor = 0.25;
+            controls.enableZoom = true;
+
+            function animate(){
+                requestAnimationFrame(animate);
+                controls.update();
+                renderer.render(scene,camera);
+            }
+            animate();
+        </script>
+    </body>
+    </html>
